@@ -77,3 +77,5 @@ API by running the following command:
 ```bash
 python object_detection/builders/model_builder_test.py
 ```
+
+export PYTHONPATH=$PYTHONPATH:`pwd`:`pwd`/slim

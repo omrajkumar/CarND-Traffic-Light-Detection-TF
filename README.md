@@ -177,12 +177,6 @@ rm -rf ssd_mobilenet_v1_coco_2017_11_17
 
 
 ```
-# SSD with Mobilenet v1 configuration for MSCOCO Dataset.
-# Users should configure the fine_tune_checkpoint field in the train config as
-# well as the label_map_path and input_path fields in the train_input_reader and
-# eval_input_reader. Search for "PATH_TO_BE_CONFIGURED" to find the fields that
-# should be configured.
-
 model {
   ssd {
     num_classes: 4
@@ -317,66 +311,6 @@ model {
     }
   }
 }
-
-train_config: {
-  batch_size: 24
-  optimizer {
-    rms_prop_optimizer: {
-      learning_rate: {
-        exponential_decay_learning_rate {
-          initial_learning_rate: 0.004
-          decay_steps: 800720
-          decay_factor: 0.95
-        }
-      }
-      momentum_optimizer_value: 0.9
-      decay: 0.9
-      epsilon: 1.0
-    }
-  }
-  batch_queue_capacity: 2
-  prefetch_queue_capacity: 2
-  fine_tune_checkpoint: "training/models/ssd_mobilenet_v1_coco.ckpt"
-  from_detection_checkpoint: true
-  # Note: The below line limits the training process to 200K steps, which we
-  # empirically found to be sufficient enough to train the pets dataset. This
-  # effectively bypasses the learning rate schedule (the learning rate will
-  # never decay). Remove the below line to train indefinitely.
-  num_steps: 2000
-  data_augmentation_options {
-    random_horizontal_flip {
-    }
-  }
-  data_augmentation_options {
-    ssd_random_crop {
-    }
-  }
-}
-
-train_input_reader: {
-  tf_record_input_reader {
-    input_path: "training/data/training_sim.record"
-  }
-  label_map_path: "training/data/traffic_light_map.pbtxt"
-}
-
-eval_config: {
-  num_examples: 8000
-  # Note: The below line limits the evaluation process to 10 evaluations.
-  # Remove the below line to evaluate indefinitely.
-  max_evals: 10
-}
-
-eval_input_reader: {
-  tf_record_input_reader {
-    input_path: "training/data/training_sim.record"
-  }
-  label_map_path: "training/data/traffic_light_map.pbtxt"
-  shuffle: false
-  num_readers: 1
-  num_epochs: 1
-}
-
 ```
 
 -  Train & Inference - ssd_mobilenet_v1
@@ -392,7 +326,7 @@ python export_inference_graph.py --input_type image_tensor --pipeline_config_pat
 
 - Sample Image
 
-![ssd_mobilenet_v1_coco](./ssd_mobilenet_v1_coco.png)
+![ssd_mobilenet_v1_coco](/Users/chanhopark/version-control/carnd/CarND-Term3-System Integration/models/ssd_mobilenet_v1_coco.png)
 
 
 

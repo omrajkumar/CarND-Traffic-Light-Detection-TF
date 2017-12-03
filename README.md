@@ -392,7 +392,7 @@ python export_inference_graph.py --input_type image_tensor --pipeline_config_pat
 
 - Sample Image
 
-![ssd_mobilenet_v1_coco](/Users/chanhopark/version-control/carnd/CarND-Term3-System Integration/models/ssd_mobilenet_v1_coco.png)
+![ssd_mobilenet_v1_coco](./ssd_mobilenet_v1_coco.png)
 
 
 
